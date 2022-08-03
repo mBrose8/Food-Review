@@ -1,7 +1,14 @@
 import express from "express";
+import dotenv from "dotenv";
 
+// Load Config
+dotenv.config({ path: './config/config.env' });
+const PORT = process.env.PORT;
+
+// Run Server 
 const server = express();
-server.listen(3000, console.log("Servidor rodando na Porta 3000..."));
+server.listen(
+    PORT, 
+    console.log("Servidor rodando no ambiente de " + process.env.NODE_ENV + " na Porta " + PORT + "...")
+);
 
-server.get('/', (req, res) => res.send("Hello minha tropa!"));
-server.get('/users', (req, res) => res.send("Página de Usuários"));
