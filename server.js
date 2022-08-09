@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import connection from './config/db.js';
+import Restaurant from './models/Restaurant.js';
 
 // Load Config
 dotenv.config({ path: './config/config.env' });
@@ -18,19 +20,13 @@ server.get('/user', (req, res) => {
     res.send('Página do Usuário')
 })
 
-var mysql = require("mysql");
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'foodreview',
-  password : 'foodreview',
-  database : 'foodreview'
-});
- 
-connection.connect();
- 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-});
- 
-connection.end();
+const migrate = async () => {
+    try {
+        const resultado = await connection.sync();
+        console.log(resultado);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+migrate();
