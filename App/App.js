@@ -9,6 +9,7 @@ import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import RegisterUser from './src/screens/RegisterUser';
 import ValidateToken from './src/screens/ValidateToken';
+import Logout from './src/screens/Logout';
  
 const Stack = createNativeStackNavigator();
  
@@ -20,6 +21,7 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RegisterUser" component={RegisterUser} />
+        <Stack.Screen name="Logout" component={Logout} />
       </Stack.Navigator>
     </NavigationContainer>
   )
