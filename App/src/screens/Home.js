@@ -15,19 +15,15 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home</Text>
-      <h1> {counter} </h1>
       <Button
-        title='Aumentar'
-        onPress={() => setCounter(counter + 1)}
+        title='Cadastrar Pet'
+        onPress={() => navigation.navigate("CadastroPet")}
       />
       <Button
-        title='Zerar'
-        onPress={() => setCounter(0)}
+        title='Cadastrar Pet Walker'
+        onPress={() => navigation.navigate("CadastroPetWalker")}
       />
-      <Button
-        title='Voltar'
-        onPress={() => navigation.navigate("Logout")}
-      />
+
     </View>
   )
 }
@@ -37,6 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#d4e0ff"
   },
   text: {
     fontSize: 30

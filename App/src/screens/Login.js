@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: "#d4e0ff"
     },
     logo: {
         width: '70%',

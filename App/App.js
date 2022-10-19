@@ -10,7 +10,8 @@ import Login from './src/screens/Login';
 import RegisterUser from './src/screens/RegisterUser';
 import ValidateToken from './src/screens/ValidateToken';
 import Logout from './src/screens/Logout';
- 
+import CadastroPet from './src/screens/CadastroPet';
+import CadastroPetWalker from './src/screens/CadastroPetWalker';
 const Stack = createNativeStackNavigator();
  
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RegisterUser" component={RegisterUser} />
         <Stack.Screen name="Logout" component={Logout} />
+        <Stack.Screen name="CadastroPet" component={CadastroPet} />
+        <Stack.Screen name="CadastroPetWalker" component={CadastroPetWalker} />
       </Stack.Navigator>
     </NavigationContainer>
   )

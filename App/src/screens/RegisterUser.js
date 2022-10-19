@@ -8,8 +8,9 @@ const RegisterUser = ({navigation}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [admin, setAdmin] = useState('');
- 
+    const [CPF, setCpf] = useState('');
+    const [Endereco, setEndereco] = useState('');
+
     const { height } = useWindowDimensions();
  
     const onRegisterPressed = () => {
@@ -42,14 +43,22 @@ const RegisterUser = ({navigation}) => {
                 setValue={setPassword}
                 secureTextEntry={true}
             />
- 
+
             <CustomInput
-                placeholder="Admin"
-                value={admin}
-                setValue={setAdmin}
+                placeholder="CPF"
+                value={CPF}
+                setValue={setCpf}
             />
+
+            <CustomInput
+                placeholder="Endereco"
+                value={Endereco}
+                setValue={setEndereco}
+            />
+
  
             <CustomButton text="Register" onPress={onRegisterPressed} />
+            <CustomButton text="Voltar" onPress={() => navigation.navigate("Logout")} />
             <TouchableOpacity
                 onPress={() => navigation.navigate("Login")}
             >
@@ -61,11 +70,13 @@ const RegisterUser = ({navigation}) => {
         </View>
     )
 };
- 
+
+
 const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: "#d4e0ff"
     },
     logo: {
         width: '70%',
