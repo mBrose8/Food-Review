@@ -1,6 +1,10 @@
 import express from "express";
 import User from "../models/User.js";
 import verifyToken from "../config/auth.js";
+import Dogs from "../models/Dogs.js";
+import PetWalker from "../models/PetWalker.js";
+
+
 
 const user = express.Router();
 
@@ -10,7 +14,7 @@ user.get('/', (req, res) => {
 });
 
 user.post('/register', async (req, res) => {
-    const { name, email, password, admin } = req.body;
+    const { name, email, password, cpf, endereco } = req.body;
 
     const alreadyExistsUser = await User.findOne(
         { where: { email } }
@@ -23,7 +27,8 @@ user.post('/register', async (req, res) => {
             .json({ message: "E-mail já utilizado por outro usuário"})
     }
 
-    const newUser = new User({ name, email, password, admin });
+    const newUser = new User({ name, email, password, cpf, endereco });
+
     const savedUser = await newUser.save().catch((err) => {
         console.log("Error: ", err);
         res.status(500).json({ error: "Não foi possível cadastrar o usuário"});
@@ -36,5 +41,57 @@ user.post('/register', async (req, res) => {
 
 
 });
+
+
+user.post('/dogs', async (req, res) => {
+
+    const { Raca, Nome, Idade, Sexo, Porte } = req.body;
+
+    const newDogs = new Dogs({ Raca, Nome, Idade, Sexo, Porte });
+
+    const savedDogs = await newDogs.save().catch((err) => {
+        console.log("Error: ", err);
+        res.status(500).json({ error: "Não foi possível cadastrar o PET"});
+    });
+
+    if (savedDogs) {
+        console.log(savedDogs);
+        res.json({ message: "Obrigado pelo cadastro de seu PET !" })
+    } 
+
+
+});
+
+user.post('/petwalker', async (req, res) => {
+
+    const { Email, Nome, Telefone } = req.body;
+
+    const newPetWalker = new PetWalker({ Email, Nome, Telefone });
+
+    const alreadyExistsPetWalker = await User.findOne(
+        { where: { Email } }
+    ).catch((err) => console.log("Error: ", err));
+
+    if (alreadyExistsPetWalker) {
+        console.log("E-mail já cadastrado: " + alreadyExistsPetWalker);
+        return res
+            .status(409)
+            .json({ message: "E-mail já utilizado por outro usuário"})
+    }
+
+    const savedPetWalker = await newPetWalker.save().catch((err) => {
+        console.log("Error: ", err);
+        res.status(500).json({ error: "Não foi possível cadastrar o usuário"});
+    });
+
+    if (savedPetWalker) {
+        console.log(savedPetWalker);
+        res.json({ message: "Obrigado pelo cadastro !" })
+
+    } 
+
+
+});
+
 
 export default user;

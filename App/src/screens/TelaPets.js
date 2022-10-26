@@ -5,7 +5,8 @@ import { Context, Provider } from '../context/dataContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-const Home = ({ navigation }) => {
+
+const TelaPets = ({ navigation }) => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Home = ({ navigation }) => {
         onPress={() => navigation.navigate("CadastroPetWalker")}
       />
        <Button
-        title='Ver meus Pets'
+        title='Ver Pets'
         onPress={() => navigation.navigate("")}
       />
     </View>
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Home
+export default TelaPets;

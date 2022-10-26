@@ -3,16 +3,33 @@ import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
- 
-const CadastroPet = ({navigation}) => {
+import api from '../api'
+
+const CadastroPetWalker = ({navigation}) => {
+
     const [Email, setEmail] = useState('');
     const [Nome, setNome] = useState('');
     const [Telefone, setTelefone] = useState('');
 
-
     const { height } = useWindowDimensions();
  
-    const onRegisterPressed = () => {}
+    const onRegisterPressedPetWalker = async () => {
+        try {
+            const data = await api.post('/user/petwalker', {
+                Email: Email,
+                Nome: Nome,
+                Telefone: Telefone
+            });
+
+            if (data.status === 200) {
+                console.log(data)
+            } else {
+                console.log(data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <View style={styles.view}>
@@ -37,7 +54,7 @@ const CadastroPet = ({navigation}) => {
                 value={Telefone}
                 setValue={setTelefone}
             />
-            <CustomButton text="Register" onPress={onRegisterPressed} />
+            <CustomButton text="Register" onPress={onRegisterPressedPetWalker} />
             <CustomButton text="Voltar" onPress={() => navigation.navigate("Home")} />
 
 
@@ -64,4 +81,4 @@ const styles = StyleSheet.create({
     },
 });
  
-export default CadastroPet;
+export default CadastroPetWalker;

@@ -27,8 +27,12 @@ const User = connection.define(
             type: Sequelize.STRING,
             allowNull: false
         },
-        admin: {
-            type: Sequelize.BOOLEAN,
+        cpf: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        endereco: {
+            type: Sequelize.STRING,
             allowNull: false
         }
     },

@@ -3,18 +3,34 @@ import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import api from "../api";
  
 const RegisterUser = ({navigation}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [CPF, setCpf] = useState('');
+    const [CPF, setCPF] = useState('');
     const [Endereco, setEndereco] = useState('');
 
     const { height } = useWindowDimensions();
  
-    const onRegisterPressed = () => {
-        alert("Registered User " + name + " and " + password + " and " + email + " and " + admin);
+    const onRegisterPressed = async () => {
+        try {
+            const data = await api.post('/user/register', {
+                name: name,
+                email: email,
+                password: password,
+                cpf: CPF,
+                endereco: Endereco
+            });
+            if(data.status === 200){
+                console.log(data)
+            } else {
+                console.log(data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
  
     return (
@@ -47,7 +63,7 @@ const RegisterUser = ({navigation}) => {
             <CustomInput
                 placeholder="CPF"
                 value={CPF}
-                setValue={setCpf}
+                setValue={setCPF}
             />
 
             <CustomInput
