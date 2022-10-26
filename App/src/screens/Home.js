@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import Teste from '../components/Teste'
 import { Context, Provider } from '../context/dataContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import api from '../api'
 
 const Home = ({ navigation }) => {
   const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
-    document.title = counter
+  useEffect(async () => {
+    const pets =  await api.get('/user/findpet')
+    console.log(pets)
   }, [counter])
 
   return (

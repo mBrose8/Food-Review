@@ -62,6 +62,16 @@ user.post('/dogs', async (req, res) => {
 
 });
 
+user.get('/findpet', async (req, res) => {
+    const pets = await Dogs.findAll().catch((err) => console.log("Error: ", err));
+
+    if (pets) {
+        return res
+            .status(200)
+            .json({pets})
+    }
+})
+
 user.post('/petwalker', async (req, res) => {
 
     const { Email, Nome, Telefone } = req.body;
