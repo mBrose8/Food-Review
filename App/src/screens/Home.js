@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
       />
              <Button
         title='Agendamento'
-        onPress={() => navigation.navigate("PaginaDeAgendamento")}
+        onPress={() => navigation.navigate("Agendamento")}
       />
     </View>
   )

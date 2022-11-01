@@ -13,6 +13,7 @@ import Logout from './src/screens/Logout';
 import CadastroPet from './src/screens/CadastroPet';
 import CadastroPetWalker from './src/screens/CadastroPetWalker';
 import TelaPets from './src/screens/TelaPets.js'
+import Agendamento from './src/screens/Agendamento.js'
 
 const Stack = createNativeStackNavigator();
  
@@ -28,6 +29,8 @@ const App = () => {
         <Stack.Screen name="CadastroPet" component={CadastroPet} />
         <Stack.Screen name="CadastroPetWalker" component={CadastroPetWalker} />
         <Stack.Screen name="TelaPets" component={TelaPets}/>
+        <Stack.Screen name="Agendamento" component={Agendamento}/> 
+
       </Stack.Navigator>
     </NavigationContainer>
   )
