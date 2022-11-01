@@ -67,7 +67,7 @@ const RegisterUser = ({navigation}) => {
             />
 
             <CustomInput
-                placeholder="Endereco"
+                placeholder="Endereco Completo"
                 value={Endereco}
                 setValue={setEndereco}
             />
