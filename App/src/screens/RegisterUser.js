@@ -25,6 +25,7 @@ const RegisterUser = ({navigation}) => {
             });
             if(data.status === 200){
                 console.log(data)
+                alert(data.data.message)
             } else {
                 console.log(data)
             }

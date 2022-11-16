@@ -15,6 +15,7 @@ import CadastroPetWalker from './src/screens/CadastroPetWalker';
 import TelaPets from './src/screens/TelaPets.js'
 import Agendamento from './src/screens/Agendamento.js'
 
+
 const Stack = createNativeStackNavigator();
  
 const App = () => {

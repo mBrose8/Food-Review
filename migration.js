@@ -5,6 +5,7 @@ import User from "./models/User.js";
 import Dogs from "./models/Dogs.js";
 import PetWalker from "./models/PetWalker.js";
 
+
 const migrate = async () => {
     try {
         const result = await connection.sync();
