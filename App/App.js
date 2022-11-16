@@ -40,7 +40,7 @@ const App = () => {
 const styles = StyleSheet.create({
   App: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
 });
  

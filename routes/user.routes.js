@@ -13,6 +13,16 @@ user.get('/', (req, res) => {
     const authData = verifyToken(token, res);
 });
 
+user.delete('/delete'), async (req, res) => {
+    console.log("Estou aqui")
+    const { id } = req.body
+    const oldDogs = new Dogs({ id });
+    const deleteDogs = await oldDogs.destroy().catch((err) => {
+        console.log("Error: ", err);
+        res.status(500).json({ error: "Não foi possível excluir o PET"});
+    });
+}
+
 user.post('/register', async (req, res) => {
     const { name, email, password, cpf, endereco } = req.body;
 

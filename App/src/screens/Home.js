@@ -4,7 +4,8 @@ import Teste from '../components/Teste'
 import { Context, Provider } from '../context/dataContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '../api'
-import Logo from '../../assets/images/Logo.png';
+import Logo from '../../assets/images/Logo.png'
+
 
 const Home = ({ navigation }) => {
   const [counter, setCounter] = useState(0);
@@ -22,7 +23,8 @@ const Home = ({ navigation }) => {
         title='Cadastrar Pet'
         onPress={() => navigation.navigate("CadastroPet")}
       />
-        <Button
+      
+      <Button
          title='Ver meus Pets'
          onPress={() => navigation.navigate("PaginaDePet")}
        />
@@ -30,7 +32,7 @@ const Home = ({ navigation }) => {
         title='Cadastrar Pet Walker'
         onPress={() => navigation.navigate("CadastroPetWalker")}
       />
-             <Button
+      <Button
         title='Agendamento'
         onPress={() => navigation.navigate("Agendamento")}
       />
@@ -50,5 +52,17 @@ const styles = StyleSheet.create({
   }
 })
 
+const buttonstyle = StyleSheet.create({
+  button: {
+    flex: 1,
+    alignSelf: 'stretch',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#007aff',
+    marginLeft: 5,
+    marginRight: 5
+  }
+})
 
 export default Home

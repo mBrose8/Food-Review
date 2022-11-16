@@ -8,7 +8,7 @@ const CustomButton = ({ onPress, text }) => {
                 {text}
             </Text>
         </Pressable>
-    )
+    )       
 }
  
 const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         width: '50%',
         marginVertical: 5,
         alignItems: 'center',
-        borderRadius: 25,
+        borderRadius: 25
     },
     text: {
         padding: 15,
