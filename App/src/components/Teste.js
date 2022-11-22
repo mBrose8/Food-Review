@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useContext } from 'react'
-import { Context } from '../context/dataContext';
+import { Context } from '../context/authContext';
 
 const Teste = () => {
     const data = useContext(Context);

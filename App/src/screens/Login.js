@@ -1,12 +1,14 @@
 import { StyleSheet, TouchableOpacity, View, Image, useWindowDimensions, Text, TextInput } from "react-native";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
+import { Context } from '../context/authContext';
 
 const Login = ({ navigation }) => {
+    const { dispatch } = useContext(Context);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,10 +18,9 @@ const Login = ({ navigation }) => {
                 email: email,
                 password: password
             })
-            console.log(authData)
             if(authData.status === 200){
                 await AsyncStorage.setItem('token', authData.data.token)
-                navigation.navigate("Home")
+                dispatch({type:'logIn', payload: true})
             } else {
                 alert('Email ou Senha Inválidos')
                 setPassword('')
@@ -50,7 +51,7 @@ const Login = ({ navigation }) => {
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
-                secureTextEntry={false}
+                secureTextEntry={true}
             />
 
             <CustomButton text="Login" onPress={onLoginPressed} />
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         padding: 20,
-        backgroundColor: "#d4e0ff"
     },
     logo: {
         width: '70%',

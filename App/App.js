@@ -1,53 +1,59 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { Context, Provider } from './src/context/authContext';
 
-import Home from './src/screens/Home';
+import Routes from './src/screens/Routes';
 import Login from './src/screens/Login';
 import RegisterUser from './src/screens/RegisterUser';
 import ValidateToken from './src/screens/ValidateToken';
-import Logout from './src/screens/Logout';
-import CadastroPet from './src/screens/CadastroPet';
-import CadastroPetWalker from './src/screens/CadastroPetWalker';
-import TelaPets from './src/screens/TelaPets.js'
-import Agendamento from './src/screens/Agendamento.js'
-
 
 const Stack = createNativeStackNavigator();
- 
+
 const App = () => {
+  const { state } = useContext(Context);
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: true }} >
-        <Stack.Screen name="ValidateToken" component={ValidateToken} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="RegisterUser" component={RegisterUser} />
-        <Stack.Screen name="Logout" component={Logout} />
-        <Stack.Screen name="CadastroPet" component={CadastroPet} />
-        <Stack.Screen name="CadastroPetWalker" component={CadastroPetWalker} />
-        <Stack.Screen name="TelaPets" component={TelaPets}/>
-        <Stack.Screen name="Agendamento" component={Agendamento}/> 
+      <Stack.Navigator screenOptions={{ headerShown: false }} >
+        {state.Loading ? (
+          <Stack.Screen name="ValidateToken" component={ValidateToken} />
+        ) : (
+          state.isLogged ? (
+            <>
+              <Stack.Screen name="ValidateToken" component={ValidateToken} />
+              <Stack.Screen name="Routes" component={Routes} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="RegisterUser" component={RegisterUser} />
+            </>
+          )
+        )
+        }
+
 
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
- 
+
 const styles = StyleSheet.create({
   App: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
 });
- 
+
 export default () => {
   return (
+    <Provider>
       <SafeAreaProvider>
         <App />
       </SafeAreaProvider>
+    </Provider>
   );
 };

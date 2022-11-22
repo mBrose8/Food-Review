@@ -13,15 +13,22 @@ user.get('/', (req, res) => {
     const authData = verifyToken(token, res);
 });
 
-user.delete('/delete'), async (req, res) => {
-    console.log("Estou aqui")
-    const { id } = req.body
-    const oldDogs = new Dogs({ id });
-    const deleteDogs = await oldDogs.destroy().catch((err) => {
-        console.log("Error: ", err);
-        res.status(500).json({ error: "Não foi possível excluir o PET"});
-    });
-}
+user.delete('/delete', async (req, res) => {
+    const id = req.body.id
+    const deleteDogs = await Dogs.destroy({
+        where: { id : id }
+    })
+    .then(function(rowDeleted){
+        if(rowDeleted === 1){
+           res.json( {message: 'PET excluído com Sucesso'});
+         }
+         else {
+            res.json( {message: 'PET não excluído'});
+         }
+      }, function(err){
+          console.log(err); 
+      })
+});
 
 user.post('/register', async (req, res) => {
     const { name, email, password, cpf, endereco } = req.body;
@@ -73,12 +80,15 @@ user.post('/dogs', async (req, res) => {
 });
 
 user.get('/findpet', async (req, res) => {
-    const pets = await Dogs.findAll().catch((err) => console.log("Error: ", err));
+    const idUser = req.params.idUser;
+    const pets = await Dogs.findAll(
+        { where: {idUser:idUser} }
+    ).catch((err) => console.log("Error: ", err));
 
     if (pets) {
         return res
             .status(200)
-            .json({pets})
+            .json(pets)
     }
 })
 

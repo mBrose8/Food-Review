@@ -1,38 +1,34 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { Context } from '../context/authContext';
 
 import api from '../api';
 
 const ValidateToken = ({ navigation }) => {
-
-    useEffect(() => {
-
-        setTimeout(() => {
-            const validateToken = async () => {
-                const token = await AsyncStorage.getItem("token");
-                if (token) {
-                    try {
-                        const data = await api.get('/user', {
-                            headers: {
-                                token: token
-                            }
-                        });
-                        console.log(data);
-                        navigation.navigate("Home");
-                    } catch (error) {
-                        console.log(error)
-                        navigation.navigate("Login");
-                    }  
-                } else {
-                    navigation.navigate("Login");
+    const { state, dispatch } = useContext(Context);
+    setTimeout(() => {
+        const validateToken = async () => {
+            const token = await AsyncStorage.getItem("token");
+            if (token) {
+                try {
+                    const data = await api.get('/user', {
+                        headers: {
+                            token: token
+                        }
+                    });
+                    await dispatch({ type: 'verify', payload: data.data.authData })
+                    navigation.navigate("Routes")
+                } catch (error) {
+                    console.log(error)
+                    dispatch({ type: 'logIn', payload: false })
                 }
-            };
-            validateToken();
-        }, 1000);
-    }, []);
-
-
+            } else {
+                dispatch({ type: 'logIn', payload: false })
+            }
+        };
+        validateToken();
+    }, 500);
 
     return (
         <View style={styles.container}>

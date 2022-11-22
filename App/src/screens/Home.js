@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import Teste from '../components/Teste'
-import { Context, Provider } from '../context/dataContext'
+import { Context, Provider } from '../context/authContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '../api'
 import Logo from '../../assets/images/Logo.png'
@@ -10,10 +10,13 @@ import Logo from '../../assets/images/Logo.png'
 const Home = ({ navigation }) => {
   const [counter, setCounter] = useState(0);
 
-  useEffect(async () => {
-    const pets =  await api.get('/user/findpet')
+  useEffect(() => {
+    const onScreenLoad = async () => {
+      const pets =  await api.get('/user/findpet')
     console.log(pets)
-  }, [counter])
+    }
+    onScreenLoad();
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -26,7 +29,7 @@ const Home = ({ navigation }) => {
       
       <Button
          title='Ver meus Pets'
-         onPress={() => navigation.navigate("PaginaDePet")}
+         onPress={() => navigation.navigate("TelaPets")}
        />
       <Button
         title='Cadastrar Pet Walker'

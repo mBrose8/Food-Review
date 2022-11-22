@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import connection from '../config/db.js';
+import User from './User.js';
 
 const Dogs = connection.define(
     'dogs',
@@ -30,8 +31,20 @@ const Dogs = connection.define(
         Porte: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        idUser: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            }
         }
     }
 );
+
+Dogs.belongsTo(User, {
+    foreignKey: 'idUser'
+  });
 
 export default Dogs;
