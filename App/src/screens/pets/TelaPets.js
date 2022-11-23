@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Button } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../context/authContext'
 import api from '../../api'
@@ -7,7 +7,7 @@ import CustomButton from '../../components/CustomButton'
 
 const TelaPets = ({ navigation }) => {
     const { state, dispatch } = useContext(Context)
-
+    const [update, setUpdate] = useState(false)
     const [pets, setPets] = useState({});
 
     useEffect(() => {
@@ -17,11 +17,19 @@ const TelaPets = ({ navigation }) => {
                 idUser: state.idUser
               }
             });
-            setPets(list.data.pets)
+            console.log(list)
+            setPets(list.data)
         }
         onScreenLoad();
-    }, [state.update]
+    }, [update]
     )
+
+    const deletarPet = async (id) => {
+        await api.post('/user/delete', {
+            id: id
+        })
+        setUpdate(true)
+    }
 
 
 
@@ -29,15 +37,17 @@ const TelaPets = ({ navigation }) => {
         <View style={styles.view}>
             
             <FlatList
-                data={Dogs}
+                data={pets}
               renderItem={({ item }) => {
                     return (
                         <View style={styles.container}>
                             <TouchableOpacity style={styles.text} onPress={() => seeReview(item)}>
-                                    <Text style={styles.title}>{item.name}</Text>
-                                    <Text style={styles.item}>{item.raca}</Text>
-                                    <Text style={styles.item}>{item.sexo}</Text>
-                                    <Text style={styles.item}>{item.idade}</Text>
+                                    <Text style={styles.title}>Nome: {item.Nome}</Text>
+                                    <Text style={styles.item}>Raça: {item.Raca}</Text>
+                                    <Text style={styles.item}>Genero: {item.Sexo}</Text>
+                                    <Text style={styles.item}>Idade: {item.Idade}</Text>
+                                    <Button color="red" title="Remover Pet" onPress={() => deletarPet(item.id)} />
+
                             </TouchableOpacity>
                         
                         </View>

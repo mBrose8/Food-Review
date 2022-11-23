@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity, Picker } from "react-native";
 import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import api from "../api";
+
  
 const RegisterUser = ({navigation}) => {
     const [name, setName] = useState('');
@@ -11,6 +12,7 @@ const RegisterUser = ({navigation}) => {
     const [password, setPassword] = useState('');
     const [CPF, setCPF] = useState('');
     const [Endereco, setEndereco] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const { height } = useWindowDimensions();
  
@@ -21,7 +23,8 @@ const RegisterUser = ({navigation}) => {
                 email: email,
                 password: password,
                 cpf: CPF,
-                endereco: Endereco
+                endereco: Endereco,
+                admin: admin
             });
             if(data.status === 200){
                 console.log(data)
@@ -72,10 +75,18 @@ const RegisterUser = ({navigation}) => {
                 value={Endereco}
                 setValue={setEndereco}
             />
+                        <Picker
+                selectedValue={admin}
+                style={styles.picker}
+                onValueChange={setAdmin}
+            >
+                <Picker.Item label="Admin User" value="true" />
+                <Picker.Item label="Regular User" value="false" />
+            </Picker>
 
  
             <CustomButton text="Register" onPress={onRegisterPressed} />
-            <CustomButton text="Voltar" onPress={() => navigation.navigate("Logout")} />
+            <CustomButton text="Voltar" onPress={() => navigation.navigate("Login")} />
             <TouchableOpacity
                 onPress={() => navigation.navigate("Login")}
             >

@@ -13,8 +13,9 @@ user.get('/', (req, res) => {
     const authData = verifyToken(token, res);
 });
 
-user.delete('/delete', async (req, res) => {
-    const id = req.body.id
+user.post('/delete', async (req, res) => {
+    const id = req.body.id;
+    console.log(req.body)
     const deleteDogs = await Dogs.destroy({
         where: { id : id }
     })
@@ -62,9 +63,9 @@ user.post('/register', async (req, res) => {
 
 user.post('/dogs', async (req, res) => {
 
-    const { Raca, Nome, Idade, Sexo, Porte } = req.body;
+    const { Raca, Nome, Idade, Sexo, Porte, idUser } = req.body;
 
-    const newDogs = new Dogs({ Raca, Nome, Idade, Sexo, Porte });
+    const newDogs = new Dogs({ Raca, Nome, Idade, Sexo, Porte, idUser });
 
     const savedDogs = await newDogs.save().catch((err) => {
         console.log("Error: ", err);
@@ -80,7 +81,7 @@ user.post('/dogs', async (req, res) => {
 });
 
 user.get('/findpet', async (req, res) => {
-    const idUser = req.params.idUser;
+    const idUser = req.query.idUser;
     const pets = await Dogs.findAll(
         { where: {idUser:idUser} }
     ).catch((err) => console.log("Error: ", err));

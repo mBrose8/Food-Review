@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import connection from '../config/db.js';
+import User from './User.js';
+import Restaurant from './Restaurant.js';
 
 const Review = connection.define(
     'review',
@@ -36,5 +38,9 @@ const Review = connection.define(
         }
     }
 );
+
+Review.belongsTo(Restaurant, {foreignKey: 'idRestaurant'});
+
+Review.belongsTo(User, {foreignKey: 'idUser'});
 
 export default Review;

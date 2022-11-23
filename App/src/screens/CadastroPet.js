@@ -1,17 +1,18 @@
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import api from '../api'
+import { Context } from "../context/authContext";
 
 const CadastroPet = ({ navigation }) => {
+    const {state, dispatch} = useContext(Context)
     const [Raca, setRaca] = useState('');
     const [Nome, setNome] = useState('');
     const [Idade, setIdade] = useState('');
     const [Sexo, setSexo] = useState('');
     const [Porte, setPorte] = useState('');
-
 
     const { height } = useWindowDimensions();
 
@@ -22,7 +23,8 @@ const CadastroPet = ({ navigation }) => {
                 Nome: Nome,
                 Idade: Idade,
                 Sexo: Sexo,
-                Porte: Porte
+                Porte: Porte,
+                idUser: state.idUser
             });
 
             if (data.status === 200) {

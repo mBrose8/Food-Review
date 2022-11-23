@@ -1,7 +1,9 @@
 import { StyleSheet, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons'
+import { NavigationContainer } from "@react-navigation/native"
+
 
 import { Context } from '../context/authContext'
 
@@ -9,6 +11,7 @@ import Home from './Home'
 import CadastroPet from './CadastroPet'
 import CadastroPetWalker from './CadastroPetWalker'
 import Agendamento from './Agendamento'
+import TelaPets from './pets/TelaPets'
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +43,16 @@ const Routes = ({ navigation }) => {
                 component={CadastroPet}
                 options={{
                     tabBarIcon: () => (
-                        <Entypo name='bowl' size={30} />
+                        <AntDesign name='adduser' size={30} />
+                    )
+                }}
+            />
+             <Tab.Screen
+                name="Meus Pets"
+                component={TelaPets}
+                options={{
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name='dog' size={30} />
                     )
                 }}
             />
@@ -49,7 +61,7 @@ const Routes = ({ navigation }) => {
                     component={Agendamento}
                     options={{
                         tabBarIcon: () => (
-                            <Entypo name='user' size={30} />
+                            <Entypo name='calendar' size={30} />
                         )
                     }}
                 />
