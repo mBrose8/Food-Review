@@ -31,8 +31,6 @@ const TelaPets = ({ navigation }) => {
         setUpdate(true)
     }
 
-
-
     return (
         <View style={styles.view}>
             

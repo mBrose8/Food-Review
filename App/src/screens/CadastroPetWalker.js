@@ -63,7 +63,6 @@ const CadastroPetWalker = ({navigation}) => {
     )
 };
 
-
 const styles = StyleSheet.create({
     view: {
         alignItems: 'center',

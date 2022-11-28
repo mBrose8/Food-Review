@@ -23,6 +23,7 @@ const Home = ({ navigation }) => {
 
       <Text style={styles.text}>Home</Text>
       <Button
+        style={buttonstyle.button}
         title='Cadastrar Pet'
         onPress={() => navigation.navigate("CadastroPet")}
       />
@@ -52,7 +53,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30
-  }
+  },
+
+
+
 })
 
 const buttonstyle = StyleSheet.create({

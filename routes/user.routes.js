@@ -120,8 +120,6 @@ user.post('/petwalker', async (req, res) => {
         res.json({ message: "Obrigado pelo cadastro !" })
 
     } 
-
-
 });
 
 
