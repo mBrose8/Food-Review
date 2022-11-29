@@ -4,7 +4,7 @@ import Teste from '../components/Teste'
 import { Context, Provider } from '../context/authContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '../api'
-import Logo from '../../assets/images/Logo.png'
+import DogHome from '../../assets/images/doghome.png'
 
 
 
@@ -13,15 +13,20 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     const onScreenLoad = async () => {
-      const pets =  await api.get('/user/findpet')
-    console.log(pets)
+      const pets = await api.get('/user/findpet')
+      console.log(pets)
     }
     onScreenLoad();
   }, [])
 
   return (
-    <h1>Home</h1>,
-    <Image styles={styles.image} source={require('../../assets/images/doghome.png')}/>
+    <View style={styles.container}>
+      <Image
+                source={DogHome}
+                style={styles.image}
+                resizeMode="contain"
+            />
+    </View>
   )
 }
 
@@ -35,26 +40,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30
   },
-  image:{
-    width:200,
-    height:200
+  image: {
+    width: 400,
+    height: 400
   }
 
 
 
-})
-
-const buttonstyle = StyleSheet.create({
-  button: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#007aff',
-    marginLeft: 5,
-    marginRight: 5
-  }
 })
 
 export default Home

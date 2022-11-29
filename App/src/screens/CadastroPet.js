@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, ScrollView, Image, useWindowDimensions, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
@@ -39,7 +39,7 @@ const CadastroPet = ({ navigation }) => {
 
 
 return (
-    <View style={styles.view}>
+    <ScrollView style={styles.view}>
         <Image
             source={Logo}
             style={[styles.logo, { height: height * 0.3 }]}
@@ -75,21 +75,22 @@ return (
         <CustomButton text="Register" onPress={onRegisterPressedPet} />
 
         <CustomButton text="Voltar" onPress={() => navigation.navigate("Home")} />
-    </View>
+    </ScrollView>
 )
 };
 
 
 const styles = StyleSheet.create({
     view: {
-        alignItems: 'center',
         padding: 20,
-        backgroundColor: "#d4e0ff"
+        backgroundColor: "#d4e0ff",
+
     },
     logo: {
         width: '70%',
         maxWidth: 300,
         maxHeight: 200,
+        margin: 'auto'
     },
     loginText: {
         fontWeight: "bold",
