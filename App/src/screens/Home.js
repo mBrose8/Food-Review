@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import { View, Text, StyleSheet, Button, Image } from 'react-native'
+import React, { useContext, useEffect, useState, Component } from 'react'
 import Teste from '../components/Teste'
 import { Context, Provider } from '../context/authContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '../api'
 import Logo from '../../assets/images/Logo.png'
+
 
 
 const Home = ({ navigation }) => {
@@ -19,28 +20,8 @@ const Home = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={styles.container}>
-
-      <Text style={styles.text}>Home</Text>
-      <Button
-        style={buttonstyle.button}
-        title='Cadastrar Pet'
-        onPress={() => navigation.navigate("CadastroPet")}
-      />
-      
-      <Button
-         title='Ver meus Pets'
-         onPress={() => navigation.navigate("TelaPets")}
-       />
-      <Button
-        title='Cadastrar Pet Walker'
-        onPress={() => navigation.navigate("CadastroPetWalker")}
-      />
-      <Button
-        title='Agendamento'
-        onPress={() => navigation.navigate("Agendamento")}
-      />
-    </View>
+    <h1>Home</h1>,
+    <Image styles={styles.image} source={require('../../assets/images/doghome.png')}/>
   )
 }
 
@@ -54,6 +35,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30
   },
+  image:{
+    width:200,
+    height:200
+  }
 
 
 
